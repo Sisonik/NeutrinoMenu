@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню</title>
+    <style>
+        :root {
+            --green: #406c24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 100%;
+            height: 100vh;
+            background-color: white;
+            line-height: 1.4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .header {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: normal;
+            padding: 5px 0;
+        }
+
+        .hours {
+            font-size: 13px;
+            margin-top: 8px;
+            padding: 8px;
+            font-weight: 800;
+            background-color: var(--green);
+            color: white;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .hours p {
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        .hours p:last-of-type {
+            text-align: left;
+        }
+
+        .menu-section {
+            padding: 9px;
+            width: 100%;
+        }
+
+        .menu-section-wrap {
+            padding: 6px;
+            border: 4px solid var(--green);
+            position: relative;
+        }
+
+        .menu-section-wrap+.menu-section-wrap {
+            margin-top: 20px;
+        }
+
+        .menu-section-wrap.menu-section-wrap--clear {
+            border-color: transparent;
+        }
+
+        .menu-section-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: #666;
+            background: white;
+            padding: 0 4px;
+            position: absolute;
+            top: -11px;
+            left: 2px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .menu-section-wrap:has(.menu-item--invert),
+        .menu-item--invert {
+            background: var(--green);
+        }
+
+        .menu-item:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .item-name-text {
+            margin-right: 10px;
+        }
+
+        .item-name-text i {
+            font-style: normal;
+            font-weight: 300;
+            font-size: 13px;
+        }
+
+        .item-price {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .item-description {
+            font-size: 13px;
+            color: #666;
+            margin-top: 3px;
+            line-height: 1.2;
+            min-height: 32px;
+        }
+
+        .menu-item--invert .item-description,
+        .menu-item--invert .item-price,
+        .menu-item--invert .item-name-text,
+        .menu-item--invert .item-name {
+            color: white;
+        }
+
+        .add-ons-section {
+            padding: 15px;
+        }
+
+        .add-ons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .add-on-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-on-price {
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        @media (max-width: 1025px) {
+            .menu-section-container {
+                flex-wrap: wrap;
+            }
+
+            .item-description {
+                min-height: unset;
+            }
+        }
+
+        @media print {
+            .menu-section-container {
+                flex-wrap: nowrap;
+            }
+
+            .item-description {
+                min-height: 32px;
+            }
+
+            .menu-container {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .add-ons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu-container">
+        <div class="header">
+            <h1>М Е Н Ю</h1>
+            <div class="hours">
+                <p>график работы кухни:</p>
+                <p> ЧТ до 13:00<br>
+                    ПТ, СБ, ВО до 19:00</p>
+            </div>
+        </div>
+
+        <div class="menu-section-container">
+            <div class="menu-section">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title">СЕНДВИЧИ</div>
+                    </div>
+                </div>
+
+                <div class="menu-section-wrap">
+                    <div class="section-subtitle">на хлебе тартин</div>
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">КРОК-МЕСЬЕ</span>
+                                <span class="item-price">450</span>
+                            </div>
+                            <div class="item-description">бешамель, чеддер, ветчина</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">ГРИЛД ЧИЗ ОВОЩИ</span>
+                                <span class="item-price">400</span>
+                            </div>
+                            <div class="item-description">песто, баклажан, вяленые томаты, кабачок, моцарелла, чеддер
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">ГРИЛД ЧИЗ ЧОРИЗО</span>
+                                <span class="item-price">400</span>
+                            </div>
+                            <div class="item-description">сливочный сыр, чеддер, луковый джем, чоризо</div>
+                        </div>
+                    </div>
+
+                </div>
+<!-- 
+                <div class="menu-section-wrap">
+                    <div class="section-subtitle">на хлебе БРИОШЬ</div>
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">УТРЕННЯЯ БУЛОЧКА</span>
+                                <span class="item-price">300</span>
+                            </div>
+                            <div class="item-description">песто, скрембл, чеддер</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">БРИОШЬ <i>(на тартине 420)</i> С ТУНЦОМ</span>
+                                <span class="item-price">450</span>
+                            </div>
+                            <div class="item-description">тунец, вареное яйцо, маринованый лук, майонез, огурец</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">БРИОШЬ С МОРТАДЕЛЛОЙ</span>
+                                <span class="item-price">450</span>
+                            </div>
+                            <div class="item-description">песто, мортаделла, вяленые томаты, квашеная капуста</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-section-wrap">
+                    <div class="menu-item menu-item--invert">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">НАШ ХЛЕБ</span>
+                                <span class="item-price">150</span>
+                            </div>
+                            <div class="item-description">со взбитым маслом
+                            </div>
+                        </div>
+                    </div>
+                </div>
+-->
+            </div>
+
+            <div class="menu-section">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title">НЕ СЕНДВИЧИ</div>
+                    </div>
+                </div>
+                <div class="menu-section-wrap">
+                    <div class="section-subtitle">каши</div>
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">КАША СЛАДКАЯ</span>
+                                <span class="item-price">270</span>
+                            </div>
+                            <div class="item-description">овсянка (на воде или молоке), яблоки с корицей, врахисовая
+                                паста
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">КАША СОЛЁНАЯ</span>
+                                <span class="item-price">300</span>
+                            </div>
+                            <div class="item-description">овсянка, томатный соус с карри луковый мармелад, чеддер, яйцо
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">ГРАНОЛА</span>
+                                <span class="item-price">250</span>
+                            </div>
+                            <div class="item-description">запечённая овсянка с орехами и ягодами (с йогуртом или молоком
+                                на
+                                выбор)</div>
+                        </div>
+                    </div>
+                </div>
+<!-- 
+                <div class="menu-section-wrap menu-section-wrap--clear">
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">СЫРНИКИ</span>
+                                <span class="item-price">300</span>
+                            </div>
+                            <div class="item-description">сметана, сгущенка или варенье на выбор</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">ЗАПЕКАНКА</span>
+                                <span class="item-price">300</span>
+                            </div>
+                            <div class="item-description">сметана, сгущенка или варенье на выбор</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">ДРАНИКИ</span>
+                                <span class="item-price">450</span>
+                            </div>
+                            <div class="item-description">картофельные драники, песто, моцарелла, яйцо, сметанный соус,
+                                квашеная
+                                капуста</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-section-wrap">
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-name">
+                                <span class="item-name-text">СУП ДНЯ</span>
+                                <span class="item-price">350</span>
+                            </div>
+                            <div class="item-description">уточняйте на кассе
+                            </div>
+                        </div>
+                    </div>
+                </div>
+-->
+            </div>
+        </div>
+ <!--       
+        <div class="menu-section">
+            <div class="add-ons-section menu-section-wrap">
+                <div class="section-subtitle">добавь к блюду</div>
+                <div class="add-ons-grid">
+                    <div class="add-on-item">
+                        <span>бекон</span>
+                        <span class="add-on-price">120</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>окорок</span>
+                        <span class="add-on-price">150</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>чоризо</span>
+                        <span class="add-on-price">100</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>мортаделла</span>
+                        <span class="add-on-price">150</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>яйцо</span>
+                        <span class="add-on-price">50</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>скрембл</span>
+                        <span class="add-on-price">130</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>бриошь</span>
+                        <span class="add-on-price">50</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>тартин</span>
+                        <span class="add-on-price">30</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>взбитое масло</span>
+                        <span class="add-on-price">80</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>джем в ассортименте</span>
+                        <span class="add-on-price">60</span>
+                    </div>
+                    <div class="add-on-item">
+                        <span>квашеная капуста</span>
+                        <span class="add-on-price">100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+-->
+    </div>
+</body>
+
+</html>
